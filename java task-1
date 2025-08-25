@@ -1,0 +1,63 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Collections; 
+
+public class StudentGradeTracker {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<Integer> grades = new ArrayList<>();
+
+        System.out.println("Welcome to the Student Grade Tracker!");
+        System.out.println("Enter student grades one by one. Enter -1 to finish.");
+
+        int grade;
+        while (true) {
+            System.out.print("Enter grade (or -1 to stop): ");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Invalid input. Please enter a whole number for the grade.");
+                scanner.next(); 
+                 System.out.print("Enter grade (or -1 to stop): ");
+            }
+            grade = scanner.nextInt();
+
+            if (grade == -1) {
+                break;
+            }
+
+            if (grade < 0 || grade > 100) {
+                System.out.println("Grade must be between 0 and 100. Please try again.");
+            } else {
+                grades.add(grade);
+            }
+        }
+
+        System.out.println("\n--- Grade Summary Report ---");
+
+        if (grades.isEmpty()) {
+            System.out.println("No grades were entered. Exiting.");
+        } else {
+            
+            double sum = 0;
+              for (int g : grades) {
+                sum += g;
+            }
+            double average = sum / grades.size();
+            System.out.printf("Average Score: %.2f\n", average); 
+
+            
+            int highest = Collections.max(grades);
+            System.out.println("Highest Score: " + highest);
+
+           
+            int lowest = Collections.min(grades);
+            System.out.println("Lowest Score: " + lowest);
+
+            
+            System.out.println("All Entered Grades: " + grades);
+        }
+
+        scanner.close(); 
+        System.out.println("Thank you for using the Student Grade Tracker!");
+    }
+}
